@@ -35,13 +35,17 @@ define void fillarrs(){
     toucharr(zzz[]); print "zzz[0] = ", zzz[0], "\n";
 }
 
-# these two behave as expected
+# this one behaves as expected
 
 define void fillarr_b10() {
 
     print "\nfillarr_b10() : \n";
     fillarrs();
 }
+
+####
+
+# this doesn't segfaults, but values are not the same
 
 define void fillarr_b8() {
 
@@ -54,8 +58,8 @@ define void fillarr_b8() {
 ####
 
 # these will segfault on different arrays.  commenting an array in fillarrs()
-# will let the segfaulting run advance forward one more array, but numbers in
-# arr[0] are not always correct.
+# will let the segfaulting run advance forward one more array, and numbers in
+# arr[0] are not always the same.
 
 # will segfault in zzz[]
 define void fillarr_b13() {
