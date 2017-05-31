@@ -1,0 +1,122 @@
+#!/usr/bin/bc
+
+define void toucharr( *ret[] ){
+
+    ret[0] = 11;
+}
+
+define void fillarrs(){
+
+    toucharr(aaa[]); print "aaa[0] = ", aaa[0], "\n";
+    toucharr(bbb[]); print "bbb[0] = ", bbb[0], "\n";
+    toucharr(ccc[]); print "ccc[0] = ", ccc[0], "\n";
+    toucharr(ddd[]); print "ddd[0] = ", ddd[0], "\n";
+    toucharr(eee[]); print "eee[0] = ", eee[0], "\n";
+    toucharr(fff[]); print "fff[0] = ", fff[0], "\n";
+    toucharr(ggg[]); print "ggg[0] = ", ggg[0], "\n";
+    toucharr(hhh[]); print "hhh[0] = ", hhh[0], "\n";
+    toucharr(iii[]); print "iii[0] = ", iii[0], "\n";
+    toucharr(jjj[]); print "jjj[0] = ", jjj[0], "\n";
+    toucharr(kkk[]); print "kkk[0] = ", kkk[0], "\n";
+    toucharr(lll[]); print "lll[0] = ", lll[0], "\n";
+    toucharr(mmm[]); print "mmm[0] = ", mmm[0], "\n";
+    toucharr(nnn[]); print "nnn[0] = ", nnn[0], "\n";
+    toucharr(ooo[]); print "ooo[0] = ", ooo[0], "\n";
+    toucharr(ppp[]); print "ppp[0] = ", ppp[0], "\n";
+    toucharr(qqq[]); print "qqq[0] = ", qqq[0], "\n";
+    toucharr(rrr[]); print "rrr[0] = ", rrr[0], "\n";
+    toucharr(sss[]); print "sss[0] = ", sss[0], "\n";
+    toucharr(ttt[]); print "ttt[0] = ", ttt[0], "\n";
+    toucharr(uuu[]); print "uuu[0] = ", uuu[0], "\n";
+    toucharr(vvv[]); print "vvv[0] = ", vvv[0], "\n";
+    toucharr(www[]); print "www[0] = ", www[0], "\n";
+    toucharr(xxx[]); print "xxx[0] = ", xxx[0], "\n";
+    toucharr(yyy[]); print "yyy[0] = ", yyy[0], "\n";
+    toucharr(zzz[]); print "zzz[0] = ", zzz[0], "\n";
+}
+
+# these two behave as expected
+
+define void fillarr_b10() {
+
+    print "\nfillarr_b10() : \n";
+    fillarrs();
+}
+
+define void fillarr_b8() {
+
+    obase = 8;
+    ibase = 8;
+    print "\nfillarr_b8() : \n";
+    fillarrs();
+}
+
+####
+
+# these will segfault on different arrays.  commenting an array in fillarrs()
+# will let the segfaulting run advance forward one more array, but numbers in
+# arr[0] are not always correct.
+
+# will segfault in zzz[]
+define void fillarr_b13() {
+
+    obase = 13;
+    ibase = 13;
+    print "\nfillarr_b13() : \n";
+    fillarrs();
+}
+
+# will segfault in xxx[]
+define void fillarr_b14() {
+
+    obase = 14;
+    ibase = 14;
+    print "\nfillarr_b14() : \n";
+    fillarrs();
+}
+
+# will segfault in vvv[]
+define void fillarr_b15() {
+
+    obase = 15;
+    ibase = 15;
+    print "\nfillarr_b15() : \n";
+    fillarrs();
+}
+
+# will segfault in ttt[]
+define void fillarr_b16() {
+
+    obase = 16;
+    ibase = 16;
+    print "\nfillarr_b16() : \n";
+    fillarrs();
+}
+
+####
+
+# this one is just to reset ibase, obase values for the next run
+
+define void reset_base() {
+
+    obase=A;
+    ibase=A;
+}
+
+fillarr_b10()
+reset_base()
+
+fillarr_b8()
+reset_base()
+
+# fillarr_b13()
+reset_base()
+
+# fillarr_b14()
+reset_base()
+
+# fillarr_b15()
+reset_base()
+
+fillarr_b16()
+reset_base()
